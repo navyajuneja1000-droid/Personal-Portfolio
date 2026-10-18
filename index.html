@@ -957,7 +957,10 @@ table.mx tbody tr:hover td,table.mx tbody tr:hover td.cap{background-color:var(-
     <div class="wf-out">
       <div>
         <p class="o-k">Lands in the bank</p>
-        <p class="o-v num" id="wfLanded">₹1,908.20</p>
+        <!-- Shown only before the script runs; it then recomputes from RATES.
+             Kept in step with the contracted case: 2,000 less 2.00% MDR, 18%
+             GST on that MDR, and a 1.00% rolling reserve. -->
+        <p class="o-v num" id="wfLanded">₹1,932.80</p>
         <p class="o-n" id="wfLandedN">T+1 to T+7 after the customer paid.</p>
       </div>
       <div>
@@ -2704,6 +2707,19 @@ function inrShort(n){
   return inr(n,0);
 }
 
+/* ---------- the rate card, in one place ----------
+   Every rupee figure on this page derives from these four numbers. They were
+   duplicated by hand before, and the duplicates drifted: a settled figure of
+   ₹1,908.20 on a ₹2,000 order implied ₹91.80 of deductions, which this rate
+   card cannot produce. Anyone reading the page who works in payments does that
+   subtraction in their head, so the numbers are computed now rather than typed. */
+var RATES = { CONTRACT:2.00, BROKEN:2.35, GST:18, RESERVE:1.00, DEMO:2000 };
+
+function settle(order, rate){
+  var mdr = order*rate/100, gst = mdr*RATES.GST/100, res = order*RATES.RESERVE/100;
+  return { mdr:mdr, gst:gst, reserve:res, deductions:mdr+gst+res, net:order-mdr-gst-res };
+}
+
 /* ---------- theme ---------- */
 var root=document.documentElement;
 try{var st=localStorage.getItem("nj-theme"); if(st) root.setAttribute("data-theme",st);}catch(e){}
@@ -2850,13 +2866,13 @@ renderEvidence(0);
 (function(){
   var amt=$("#wfAmt"), brk=$("#wfBreak"), rows=$("#wfRows");
   if(!amt) return;
-  var CONTRACT=2.00, BROKEN=2.35, GSTR=18, RESERVE=1.00;
+  var CONTRACT=RATES.CONTRACT, BROKEN=RATES.BROKEN, GSTR=RATES.GST, RESERVE=RATES.RESERVE;
   function draw(){
     var order=+amt.value;
     var rate=brk.checked?BROKEN:CONTRACT;
-    var mdr=order*rate/100, gst=mdr*GSTR/100, res=order*RESERVE/100;
-    var net=order-mdr-gst-res;
-    var cMdr=order*CONTRACT/100, cGst=cMdr*GSTR/100;
+    var s=settle(order, rate), c=settle(order, CONTRACT);
+    var mdr=s.mdr, gst=s.gst, res=s.reserve, net=s.net;
+    var cMdr=c.mdr, cGst=c.gst;
     var varc=(mdr+gst)-(cMdr+cGst);
     var pct=function(v){return (v/order*100)};
     var r1=order, r2=order-mdr, r3=order-mdr-gst;
@@ -3067,15 +3083,23 @@ $$("[data-chart]").forEach(function(el){
   var grid=$("#taxGrid"), det=$("#taxDetail"); if(!grid) return;
   var T=[
    {n:"Fee mismatch",o:"Payment aggregator",w:"The aggregator charged a rate that does not match the contract for this card type, network or issuer. The single largest source of silent leakage, and the reason the rate-card engine exists.",
-    r:[["Expected fee","₹40.00"],["Actual fee","₹47.00"],["Variance","₹7.00",1],["Recoverable","Yes — with evidence"]]},
+    r:[["Expected fee",inr(settle(RATES.DEMO,RATES.CONTRACT).mdr)],
+       ["Actual fee",inr(settle(RATES.DEMO,RATES.BROKEN).mdr)],
+       ["Variance",inr(settle(RATES.DEMO,RATES.BROKEN).mdr-settle(RATES.DEMO,RATES.CONTRACT).mdr),1],
+       ["Recoverable","Yes — with evidence"]]},
    {n:"GST-on-MDR error",o:"Payment aggregator",w:"GST computed on the wrong base — usually because the underlying MDR was wrong, so the tax inherits the error and compounds it by 18%.",
-    r:[["Expected GST","₹7.20"],["Actual GST","₹8.46"],["Variance","₹1.26",1],["Recoverable","Yes — follows the fee claim"]]},
+    r:[["Expected GST",inr(settle(RATES.DEMO,RATES.CONTRACT).gst)],
+       ["Actual GST",inr(settle(RATES.DEMO,RATES.BROKEN).gst)],
+       ["Variance",inr(settle(RATES.DEMO,RATES.BROKEN).gst-settle(RATES.DEMO,RATES.CONTRACT).gst),1],
+       ["Recoverable","Yes — follows the fee claim"]]},
    {n:"Refund lag",o:"Finance ops",w:"A refund was debited from settlement before the customer refund actually completed. Usually a legitimate timing difference — but it has to be proven rather than assumed.",
     r:[["Refund raised","Day 0"],["Settlement debit","T+1"],["Customer credited","T+4"],["Classification","Timing — monitor"]]},
    {n:"Chargeback deduction",o:"Payment aggregator",w:"A deduction appeared in settlement with no corresponding chargeback record on the merchant side. Either the record is missing, or the deduction is not the merchant's.",
     r:[["Deduction","₹2,000.00"],["Matching case","None found"],["Amount at risk","₹2,000.00",1],["Next action","Raise dispute"]]},
    {n:"Part-settlement",o:"Payment aggregator",w:"One order settled across two batches. Not an error, but batch-level matching reports it as a shortfall and an analyst re-investigates it every month.",
-    r:[["Order value","₹2,000.00"],["Batch 1","₹1,200.00"],["Batch 2","₹708.20"],["Classification","Matched across two"]]},
+    r:[["Order value",inr(RATES.DEMO)],["Batch 1",inr(1200)],
+       ["Batch 2",inr(settle(RATES.DEMO,RATES.CONTRACT).net-1200)],
+       ["Classification","Matched across two"]]},
    {n:"T+n slippage",o:"Payment aggregator",w:"Settlement landed outside the contracted window. Individually trivial; across a quarter it is a working-capital cost the merchant is absorbing without noticing.",
     r:[["Contracted","T+2"],["Actual","T+5"],["Slippage","3 days",1],["Classification","SLA breach"]]},
    {n:"Missing UTR",o:"Bank / aggregator",w:"A bank credit arrived with no reference that ties it back to a settlement. The money is there; the explanation is not — which is exactly the state the north-star metric refuses to score as a match.",
@@ -3083,11 +3107,14 @@ $$("[data-chart]").forEach(function(el){
    {n:"Duplicate credit",o:"Bank / aggregator",w:"The same settlement credited twice. Pleasant, briefly. It will be clawed back, and a merchant who has already recognised it has a problem at close.",
     r:[["Settlement ID","Identical"],["Credits found","2"],["Excess","₹1,84,200.00",1],["Next action","Flag before recognition"]]},
    {n:"Reserve hold",o:"Payment aggregator",w:"A rolling reserve held past its agreed release date. It is the merchant's money sitting on someone else's balance sheet.",
-    r:[["Held","₹20.00"],["Release due","T+180"],["Days overdue","24",1],["Classification","Ageing — chase"]]},
+    r:[["Held",inr(settle(RATES.DEMO,RATES.CONTRACT).reserve)],["Release due","T+180"],
+       ["Days overdue","24",1],["Classification","Ageing — chase"]]},
    {n:"Missing settlement",o:"Payment aggregator",w:"A captured payment with no settlement against it at all. The clearest possible break, and the one most likely to be lost inside a batch total.",
     r:[["Order value","₹2,000.00"],["Settlement","None"],["Amount at risk","₹2,000.00",1],["Classification","Exception — escalate"]]},
    {n:"Amount mismatch",o:"Finance ops",w:"The settled amount differs from the order value net of every known deduction, and none of the other ten categories explain it. The residual bucket — deliberately kept, because pretending it is empty is how drift starts.",
-    r:[["Expected net","₹1,908.20"],["Actual credit","₹1,894.60"],["Unexplained","₹13.60",1],["Classification","Requires review"]]}
+    r:[["Expected net",inr(settle(RATES.DEMO,RATES.CONTRACT).net)],
+       ["Actual credit",inr(settle(RATES.DEMO,RATES.CONTRACT).net-13.60)],
+       ["Unexplained",inr(13.60),1],["Classification","Requires review"]]}
   ];
   var cur=0;
   function paint(){
