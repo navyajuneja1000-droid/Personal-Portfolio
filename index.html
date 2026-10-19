@@ -1020,7 +1020,7 @@ table.mx tbody tr:hover td,table.mx tbody tr:hover td.cap{background-color:var(-
         <span class="go">Open the case study <svg class="arw" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
       <div class="wk-stat">
-        <span class="v num">98.7%</span>
+        <span class="v num">99.0%</span>
         <p class="k">of bank replies applied without a human — measured against a seeded synthetic dataset, not live traffic.</p>
         <span class="pv pv-model">Modelled</span>
       </div>
@@ -1448,6 +1448,7 @@ table.mx tbody tr:hover td,table.mx tbody tr:hover td.cap{background-color:var(-
       <div><p class="k">My role</p><p class="v">Built end to end — data model, turnaround rules, bank reply parser, intake checks and dashboard</p></div>
       <div><p class="k">Output</p><p class="v">Working web application, tested against a seeded synthetic dataset</p></div>
       <div><p class="k">Context</p><p class="v">MID procurement across Indian acquiring, generalised from operator experience · acquirer names invented</p></div>
+      <div><p class="k">Written up as</p><p class="v"><a href="https://github.com/navyajuneja1000-droid/MID-Procurement-Workflow/blob/HEAD/PRD.md" target="_blank" rel="noopener">The PRD ↗</a></p></div>
       <div><p class="k">Live build</p><p class="v"><a href="https://workflowmidprocurement.vercel.app/" target="_blank" rel="noopener">Open the live build ↗</a></p></div>
     </div>
   </header>
@@ -1553,8 +1554,8 @@ table.mx tbody tr:hover td,table.mx tbody tr:hover td.cap{background-color:var(-
 
   <section class="act wrap" id="mp-built">
     <div class="act-head"><p class="rail">04 — What was built</p>
-      <div><h2>Four parts, built end to end.</h2>
-        <p class="dek">Every figure in this section is measured against a seeded synthetic dataset of 360 merchants, 1,380 requests and 653 bank emails — not live traffic.</p></div></div>
+      <div><h2>Seven parts, built end to end.</h2>
+        <p class="dek">Every figure in this section is measured against a seeded synthetic dataset of 360 merchants, 1,376 requests and 626 bank emails — not live traffic.</p></div></div>
     <div class="act-body"><p class="rail">System</p>
       <div>
         <div class="grid-2">
@@ -1574,24 +1575,39 @@ table.mx tbody tr:hover td,table.mx tbody tr:hover td.cap{background-color:var(-
             <p>Per-acquirer field requirements plus format and cross-field validation, so a request that would bounce is stopped before it costs an acquirer cycle.</p>
           </div>
           <div class="panel">
-            <p class="mono-label" style="color:var(--accent)">04 · Dashboard</p>
+            <p class="mono-label" style="color:var(--accent)">04 · Bank file generation</p>
+            <h4 style="margin-top:6px">Each bank's template, filled and checked</h4>
+            <p>One submission template per acquirer held as configuration, because banks change them with no notice. Every column declares who owns it, so a blank is reported against the team that owes it rather than counted as an error. Pre-flight catches what a person cannot see by eye: a value one word off a dropdown, a pincode about to lose its leading zero, two tabs describing one merchant differently.</p>
+          </div>
+          <div class="panel">
+            <p class="mono-label" style="color:var(--accent)">05 · Restriction registry</p>
+            <h4 style="margin-top:6px">Six category lists that disagree</h4>
+            <p>Each acquirer keeps its own restricted-category list, in four incompatible formats, and one merchant can be eligible at one bank and refused at another. Held as editable data with the source and date on every entry, because a list only engineers can change is out of date within a month.</p>
+          </div>
+          <div class="panel">
+            <p class="mono-label" style="color:var(--accent)">06 · SLA chaser</p>
+            <h4 style="margin-top:6px">Chases what is late, then stops</h4>
+            <p>Judged on the round the bank is holding now, never the total, and never sent for a request that is actually waiting on us. One nudge, one firmer follow-up, then it stops emailing and hands over to a person.</p>
+          </div>
+          <div class="panel">
+            <p class="mono-label" style="color:var(--accent)">07 · Dashboard</p>
             <h4 style="margin-top:6px">Turnaround that can be argued with</h4>
             <p>Blended ops turnaround with the unraised queue reported separately, an acquirer scorecard, bounce and rejection reasons, and a per-request timeline.</p>
           </div>
         </div>
 
-        <p class="mono-label" style="margin-top:var(--s7);margin-bottom:var(--s4)">Bank reply parser · 1,179 rows from 590 emails</p>
+        <p class="mono-label" style="margin-top:var(--s7);margin-bottom:var(--s4)">Bank reply parser · 1,250 rows from 626 emails</p>
         <div class="grid-3">
           <div class="panel"><span class="stat"><span class="v num">98.7%</span><span class="k">of reply rows applied automatically</span></span><span class="pv pv-model" style="margin-top:var(--s3)">Modelled · synthetic data</span></div>
           <div class="panel"><span class="stat"><span class="v num">100%</span><span class="k">precision on the rows it applied</span></span><span class="pv pv-model" style="margin-top:var(--s3)">Modelled · synthetic data</span></div>
-          <div class="panel"><span class="stat"><span class="v num">1.3%</span><span class="k">held for a person rather than guessed</span></span><span class="pv pv-model" style="margin-top:var(--s3)">Modelled · synthetic data</span></div>
+          <div class="panel"><span class="stat"><span class="v num">1.0%</span><span class="k">held for a person rather than guessed</span></span><span class="pv pv-model" style="margin-top:var(--s3)">Modelled · synthetic data</span></div>
         </div>
 
         <p class="mono-label" style="margin-top:var(--s6);margin-bottom:var(--s4)">Intake readiness · share of records on arrival</p>
         <div class="grid-3">
-          <div class="panel"><span class="stat"><span class="v num">82.3%</span><span class="k">clean for every acquirer they were going to</span></span><span class="pv pv-model" style="margin-top:var(--s3)">Modelled · synthetic data</span></div>
-          <div class="panel"><span class="stat"><span class="v num">9.0%</span><span class="k">ready for some acquirers and blocked for others</span></span><span class="pv pv-model" style="margin-top:var(--s3)">Modelled · synthetic data</span></div>
-          <div class="panel"><span class="stat"><span class="v num" style="color:var(--var)">8.7%</span><span class="k">blocked everywhere</span></span><span class="pv pv-model" style="margin-top:var(--s3)">Modelled · synthetic data</span></div>
+          <div class="panel"><span class="stat"><span class="v num">70.3%</span><span class="k">clear everywhere on arrival: paperwork complete and the category accepted</span></span><span class="pv pv-model" style="margin-top:var(--s3)">Modelled · synthetic data</span></div>
+          <div class="panel"><span class="stat"><span class="v num">12.6%</span><span class="k">some acquirers can go out today, others cannot</span></span><span class="pv pv-model" style="margin-top:var(--s3)">Modelled · synthetic data</span></div>
+          <div class="panel"><span class="stat"><span class="v num" style="color:var(--var)">17.2%</span><span class="k">nothing can go out yet</span></span><span class="pv pv-model" style="margin-top:var(--s3)">Modelled · synthetic data</span></div>
         </div>
       </div>
     </div>
@@ -1623,7 +1639,7 @@ table.mx tbody tr:hover td,table.mx tbody tr:hover td.cap{background-color:var(-
   <section class="act wrap" id="mp-mistakes">
     <div class="act-head"><p class="rail">06 — Two mistakes</p>
       <div><h2>How it was wrong, and how that was caught.</h2>
-        <p class="dek">This matters more than the results above. A system that reports 98.7% is only worth trusting if you know how it fails.</p></div></div>
+        <p class="dek">This matters more than the results above. A system that reports 99.0% is only worth trusting if you know how it fails.</p></div></div>
     <div class="act-body"><p class="rail">Failure modes</p>
       <div>
         <div class="grid-2">
@@ -1646,21 +1662,39 @@ table.mx tbody tr:hover td,table.mx tbody tr:hover td.cap{background-color:var(-
   </section>
 
   <section class="act wrap" id="mp-notbuilt">
-    <div class="act-head"><p class="rail">07 — Not built</p>
-      <div><h2>Measure first. Automate the chase later.</h2>
-        <p class="dek">Each of these is useful. Each one also depends on the turnaround and intake data being trusted first, which is why the sequencing put them last.</p></div></div>
-    <div class="act-body"><p class="rail">Deferred</p>
+    <div class="act-head"><p class="rail">07 — The chase, and whether it works</p>
+      <div><h2>Building the chaser was easy. Measuring it was the problem.</h2>
+        <p class="dek">The sequencing put chasing last on purpose: chasing a bank on a number before the number is trusted automates an argument. Once the scorecard was right, the chaser was a week. Then I tried to prove it helped, and could not.</p></div></div>
+    <div class="act-body"><p class="rail">Measurement</p>
+      <div>
+        <div class="prose">
+          <p>The obvious comparison says chasing makes banks <b>slower</b>: chased rounds averaged 9.5 working days against 4.4 for unchased ones. That is not an effect, it is the selection. Every chased round had already run past the SLA by definition, and the unchased group is mostly banks that answered on day two.</p>
+          <p>So I compared inside each acquirer instead. Also wrong, and the report caught it: the chase goes out the day after each bank's own SLA, so on any given day the chased group is simply the banks with short SLAs. The first version printed four banks with zero chases, which is what gave it away.</p>
+          <p>Then the real problem. The chase rule is deterministic, so within any one bank <b>every eligible round was chased</b>. There is no control group. No amount of analysis could answer the question, because everybody eligible had been treated.</p>
+        </div>
+        <div class="grid-2" style="margin-top:var(--s6)">
+          <div class="panel"><p class="mono-label" style="color:var(--ink-3)">The fix</p><h4 style="margin-top:6px">A deliberate holdout</h4><p>One in ten late applications is never chased, chosen by a stable hash, with the largest merchants excluded. A handful of merchants wait slightly longer, which is the price of knowing whether the other nine tenths of the chasing does anything.</p></div>
+          <div class="panel dark"><p class="mono-label" style="color:var(--accent)">The current answer</p><h4 style="margin-top:6px">There isn't one yet</h4><p>125 chased rounds against 9 held out, and the largest group is 16 short of a usable floor. The report says that in those words rather than printing a number, because a figure from that evidence is noise a team would act on.</p></div>
+        </div>
+        <p class="pull">A chaser that reports a number it cannot support is worse than one that reports nothing, because somebody will put the number in a deck.<cite>MID Procurement — on measuring the chase</cite></p>
+        <p class="cite">There is a test that plants a known two-day effect and checks the estimator recovers it, which is what makes the rest of the module worth believing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="mp-cut">
+    <div class="act-head"><p class="rail">08 — What was cut</p>
+      <div><h2>Two things deliberately left out.</h2></div></div>
+    <div class="act-body"><p class="rail">Scope</p>
       <div class="ng" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-        <div><p class="t">Bank file generation per acquirer</p><p class="w">Generating each bank's file from intake data is only safe once the readiness check has shown that data is clean.</p></div>
-        <div><p class="t">Website policy scanner with MCC recommendation</p><p class="w">An MCC suggestion feeds every request created from it. It belongs after the unit of work it would populate is modelled and trusted.</p></div>
-        <div><p class="t">Post-live monitoring</p><p class="w">It starts where procurement ends. The problem to solve first was getting merchants to live.</p></div>
-        <div><p class="t">SLA chaser</p><p class="w">Chasing a bank on a number before the number is trusted automates an argument. The scorecard had to be right first.</p></div>
+        <div><p class="t">Post-live website monitoring</p><p class="w">It needs live merchant sites, which this project has no honest way to test: a scanner proven against invented web pages proves nothing. It is also a different product from procurement. Building it here would have padded the project instead of finishing it.</p></div>
+        <div><p class="t">Letting the system block on its own</p><p class="w">It computes which categories every acquirer refuses, and still will not block on them. The overlap of those lists gets wider the fewer lists you hold, so inferring a rule from it makes the rules strongest exactly where the data is thinnest. A person promotes it, and that is recorded.</p></div>
       </div>
     </div>
   </section>
 
   <section class="act wrap" id="mp-live" style="border-bottom:0">
-    <div class="act-head"><p class="rail">08 — The live build</p>
+    <div class="act-head"><p class="rail">09 — The live build</p>
       <div><h2>Open it and click any number.</h2>
         <p class="dek">Every turnaround figure in the dashboard opens into the timeline of events that produced it.</p></div></div>
     <div class="act-body"><p class="rail">Live build</p>
