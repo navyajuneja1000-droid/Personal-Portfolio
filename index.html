@@ -389,6 +389,18 @@ table.dt tbody tr:last-child td{border-bottom:0}
 table.dt td b{font-weight:600;color:var(--ink)}
 table.dt tr.hi td{background:var(--accent-soft)}
 
+/* PRD contents nav */
+.prd-toc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+@media (max-width:820px){.prd-toc{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.prd-toc{grid-template-columns:1fr}}
+.prd-toc a{background:var(--card);padding:var(--s4) var(--s5);display:block;text-decoration:none;
+  color:var(--ink-2);font-size:14.5px;line-height:1.35;transition:background .15s,color .15s}
+.prd-toc a:hover{background:var(--card-2);color:var(--ink)}
+.prd-toc .n{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  color:var(--ink-4);margin-bottom:5px}
+#view-mid-prd code{font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+
 /* strike cards for non-goals */
 .ng{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);
   border:1px solid var(--rule);border-radius:3px;overflow:hidden}
@@ -1448,7 +1460,7 @@ table.mx tbody tr:hover td,table.mx tbody tr:hover td.cap{background-color:var(-
       <div><p class="k">My role</p><p class="v">Built end to end — data model, turnaround rules, bank reply parser, intake checks and dashboard</p></div>
       <div><p class="k">Output</p><p class="v">Working web application, tested against a seeded synthetic dataset</p></div>
       <div><p class="k">Context</p><p class="v">MID procurement across Indian acquiring, generalised from operator experience · acquirer names invented</p></div>
-      <div><p class="k">Written up as</p><p class="v"><a href="https://github.com/navyajuneja1000-droid/MID-Procurement-Workflow/blob/HEAD/PRD.md" target="_blank" rel="noopener">The PRD ↗</a></p></div>
+      <div><p class="k">Written up as</p><p class="v"><a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd">Read the PRD</a></p></div>
       <div><p class="k">Live build</p><p class="v"><a href="https://workflowmidprocurement.vercel.app/" target="_blank" rel="noopener">Open the live build ↗</a></p></div>
     </div>
   </header>
@@ -1713,6 +1725,376 @@ table.mx tbody tr:hover td,table.mx tbody tr:hover td.cap{background-color:var(-
         <p style="margin-top:var(--s6);display:flex;flex-wrap:wrap;gap:var(--s3)">
           <a class="btn btn-p" href="https://workflowmidprocurement.vercel.app/" target="_blank" rel="noopener">Open the live build ↗</a>
           <a class="btn btn-s" href="#/work/found-it" data-route="/work/found-it">Next case — Found It
+            <svg class="arw" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= MID PRD ================= -->
+<main id="view-mid-prd" class="csview" data-case="mid-procurement" hidden>
+  <header class="cs-hero wrap">
+    <p style="margin-bottom:var(--s5)"><a class="backlink" href="#/work/mid-procurement" data-route="/work/mid-procurement">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Back to the case</a></p>
+    <p class="cs-kicker">MID Procurement Automation</p>
+    <h1>Product requirements</h1>
+    <p class="lede">A payment aggregator cannot put a merchant live until an acquiring bank issues a MID. Getting that MID is a manual, multi-party chase across six or seven banks, tracked in a spreadsheet, and nobody in the business can say with confidence where the time goes.</p>
+    <div class="cs-meta">
+      <div><p class="k">Version</p><p class="v">v1.0 · October 2026</p></div>
+      <div><p class="k">Author</p><p class="v">Navya Juneja, written from two years running this process at a payment aggregator</p></div>
+      <div><p class="k">Status</p><p class="v">Built and tested end to end against a seeded synthetic dataset. 283 tests</p></div>
+      <div><p class="k">Source</p><p class="v"><a href="https://github.com/navyajuneja1000-droid/MID-Procurement-Workflow/blob/HEAD/PRD.md" target="_blank" rel="noopener">This document in the repo ↗</a></p></div>
+    </div>
+    <nav class="prd-toc" aria-label="Contents" style="margin-top:var(--s7)">
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-1"><span class="n">01</span>In one page</a>
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-2"><span class="n">02</span>The problem</a>
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-3"><span class="n">03</span>Who this is for</a>
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-4"><span class="n">04</span>Goals and non-goals</a>
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-5"><span class="n">05</span>The rules that are easy to get wrong</a>
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-6"><span class="n">06</span>What the product does</a>
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-7"><span class="n">07</span>How success is measured</a>
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-8"><span class="n">08</span>Requirements</a>
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-9"><span class="n">09</span>What was cut</a>
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-10"><span class="n">10</span>Open questions</a>
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-11"><span class="n">11</span>Status, and what is not claimed</a>
+      <a href="#/work/mid-procurement/prd" data-route="/work/mid-procurement/prd" data-anchor="prd-12"><span class="n">12</span>Reading the code</a>
+    </nav>
+  </header>
+
+  <section class="act wrap" id="prd-1">
+    <div class="act-head"><p class="rail">01 — In one page</p>
+      <div><h2>Four things the spreadsheet cannot do.</h2></div></div>
+    <div class="act-body"><p class="rail">Summary</p>
+      <div>
+        <div class="prose">
+          <p><b>Reports turnaround honestly.</b> Every figure is derived from an immutable event log rather than typed into a cell, and the clocks are allowed to overlap because in reality they do.</p>
+          <p><b>Finds the gaps on arrival</b> instead of several ops days later, and bounces them once, to the team that owns them, naming what each gap is holding up.</p>
+          <p><b>Builds each bank's submission file</b> from one resolved record, checks it for the errors a person cannot see by eye, and drafts the covering email.</p>
+          <p><b>Chases what is actually late</b>, on the round the bank is holding now, and stops chasing when a third email would do more harm than good.</p>
+          <p>The scope deliberately stops at the external boundary. Every outbound email is drafted and a person sends it.</p>
+        </div>
+        <p class="pull">Built and tested end to end against a seeded synthetic dataset of 360 merchants and 1,376 requests. No real merchant, bank, rate card or template appears anywhere in it, and it has never run against a live pipeline.<cite>Status — section 11 is explicit about what that means</cite></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="prd-2">
+    <div class="act-head"><p class="rail">02 — The problem</p>
+      <div><h2>Every merchant waits on a bank. Nobody could say for how long, or why.</h2>
+        <p class="dek">What has to happen before a merchant can take a card payment, and the four ways it fails.</p></div></div>
+    <div class="act-body"><p class="rail">Context</p>
+      <div>
+        <div class="prose">
+          <p>A merchant signs with the aggregator. Before a single transaction can be processed, each acquiring bank the merchant will route through has to issue a MID against that merchant's specific line of business. One merchant commonly needs three or four MIDs from a panel of six or seven acquirers, raised in parallel, each with its own forms, its own category rules and its own idea of how long a reply should take.</p>
+          <p>Every one of those applications passes between four parties: BD, who owns the merchant relationship and the documents; onboarding, who owns the ticket; operations, who raises it and chases it; and the acquirer, who decides.</p>
+        </div>
+        <div class="dt-scroll" style="margin-top:var(--s6)">
+          <table class="dt">
+            <thead><tr><th>The scale this runs at</th><th class="n">Today</th></tr></thead>
+            <tbody>
+              <tr><td>Requests a month</td><td class="n">~1,000</td></tr>
+              <tr><td>People handling them</td><td class="n">3</td></tr>
+              <tr><td>Acquirers on the panel</td><td class="n">6 to 7</td></tr>
+              <tr><td>Acquirers per merchant</td><td class="n">3 to 4, in parallel</td></tr>
+              <tr><td>Requests that bounce back for missing or wrong data</td><td class="n">30 to 40%</td></tr>
+              <tr><td>Where it is tracked</td><td class="n">one spreadsheet, by hand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose" style="margin-top:var(--s6)">
+          <p><b>Turnaround is unknowable.</b> Leadership asks how long procurement takes. The answer is produced by hand each week by reading a sheet of dates. It cannot be broken down by party without someone rebuilding it, it cannot be opened up when a specific merchant took 22 days, and because the sheet records a status rather than a history, a cell that gets overwritten takes the evidence with it.</p>
+          <p><b>Gaps are found at the worst possible moment.</b> A missing signatory PAN surfaces while someone is filling in a bank's template, which is several ops days after the ticket arrived. The ticket then bounces, and those days are spent twice: once before the bounce and once after it comes back.</p>
+          <p><b>Each bank is a different animal, and the differences are undocumented.</b> Six acquirers means six submission templates, six sets of category rules, six definitions of a reasonable reply time, and six reply formats to read. All of that knowledge lives in the heads of three people.</p>
+          <p><b>Chasing is either forgotten or indiscriminate.</b> There is no list of what is genuinely late, so follow-up is either skipped or done by sending everyone a reminder, which trains banks to ignore them.</p>
+        </div>
+        <p class="pull">The tracker holds one row per merchant. The actual unit of work is one merchant, one MCC, one acquirer. The moment a merchant has two use cases, a one-row-per-merchant sheet has to either lose one of them or describe both in a cell, and every report built on top inherits that.<cite>Why the spreadsheet cannot be fixed by being a better spreadsheet</cite></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="prd-3">
+    <div class="act-head"><p class="rail">03 — Who this is for</p>
+      <div><h2>Five readers, one primary user.</h2></div></div>
+    <div class="act-body"><p class="rail">Users</p>
+      <div>
+        <div class="dt-scroll">
+          <table class="dt">
+            <thead><tr><th>User</th><th>What they need</th><th>What they get today</th></tr></thead>
+            <tbody>
+              <tr class="hi"><td><b>Ops analyst</b><br>3 people, primary user</td><td>What can go out this morning, what is blocked and on whom, what is late</td><td>A sheet they maintain by hand and a memory of which bank wants what</td></tr>
+              <tr><td><b>Ops lead</b></td><td>Where time goes, which acquirer is slow, whether the backlog is growing</td><td>A weekly figure rebuilt by hand, with no way to open it up</td></tr>
+              <tr><td><b>BD</b></td><td>What is missing on their merchant, once, clearly, with the consequence</td><td>Several separate messages, often repeating the same gap</td></tr>
+              <tr><td><b>Onboarding</b></td><td>The same, for the fields they own</td><td>The same problem</td></tr>
+              <tr><td><b>Leadership</b></td><td>One honest turnaround number per party</td><td>A number they cannot interrogate</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose" style="margin-top:var(--s5)">
+          <p>The ops analyst is the primary user and every design call resolves in their favour. A feature that produces a better report but costs the analyst a keystroke a day is the wrong trade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="prd-4">
+    <div class="act-head"><p class="rail">04 — Goals and non-goals</p>
+      <div><h2>Five goals, and five things it deliberately will not do.</h2></div></div>
+    <div class="act-body"><p class="rail">Goals</p>
+      <div>
+        <div class="prose">
+          <p><b>Every turnaround figure derived, never stored.</b> Any number can be opened up to the events that produced it.</p>
+          <p><b>Find and route every gap on arrival</b>, in one consolidated bounce per party.</p>
+          <p><b>Generate each bank's file</b> from a single resolved record, with the errors a human cannot see caught before it goes.</p>
+          <p><b>Hold the per-acquirer knowledge as data</b>, editable by the team that learns it, not as code or as memory.</p>
+          <p><b>Chase on evidence</b>, and be able to say whether the chasing works.</p>
+        </div>
+        <div class="ng" style="margin-top:var(--s6)">
+          <div><p class="t">Send anything</p><p class="w">One checkpoint at the external boundary. The cost of a wrong file reaching a bank is not a retry, it is a conversation with a relationship manager and a batch that misses its slot.</p></div>
+          <div><p class="t">Decide eligibility on its own</p><p class="w">A bank's restricted-category list is a fact about today. The system surfaces it and a person decides.</p></div>
+          <div><p class="t">Replace the acquirer's systems</p><p class="w">No core banking integration, and no attempt to predict a bank's decision.</p></div>
+          <div><p class="t">Monitor merchant sites after go-live</p><p class="w">Cut deliberately. It is a different product, and this project has no honest way to test it.</p></div>
+          <div><p class="t">Match replies without confidence controls</p><p class="w">A wrongly matched bank reply writes a wrong event into the clock, and every figure downstream inherits it with nothing flagged.</p></div>
+        </div>
+        <p class="cite">Each non-goal is a decision, not an omission.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="prd-5">
+    <div class="act-head"><p class="rail">05 — The rules that are easy to get wrong</p>
+      <div><h2>The part that cannot be derived from first principles by someone who has not run the process.</h2>
+        <p class="dek">Each rule below is encoded as an executable test, so a later change cannot quietly break it.</p></div></div>
+    <div class="act-body"><p class="rail">Domain rules</p>
+      <div>
+        <div class="prose">
+          <p><b>5.1 The unit of work is merchant + MCC + acquirer.</b> Not merchant + acquirer. Bank replies are therefore matched on legal name <i>plus</i> MCC, because a merchant with two live applications at one bank has two different answers coming.</p>
+          <p><b>5.2 Clocks overlap, in two specific places.</b> Ops runs alongside the acquirer, because getting the MID is ops' job and they do not put it down while the bank has it. Onboarding runs alongside BD, because onboarding owns the ticket until it comes back clean. The consequence: per-party days sum to more than elapsed time, so a share-of-delay pie chart is arithmetically wrong no matter how good it looks. The honest visual is a timeline per request with the overlaps drawn.</p>
+          <p><b>5.3 Ops is measured per episode, not merged.</b> A request ops picks up three times is three entries, and that count is itself the rework measure. Raising to a bank splits an episode into solo and overlap phases but is not a new pickup.</p>
+          <p><b>5.4 Ops time splits into solo and overlap.</b> Solo is the efficiency figure. Overlap is time ops is accountable for but does not control. Reporting one without the other misleads in opposite directions.</p>
+          <p><b>5.5 A 2pm cut-off, on the acquirer clock only.</b> A batch sent after 2pm starts the bank's clock the next working day. Internal clocks start immediately.</p>
+          <p><b>5.6 Working days, with per-acquirer holiday calendars.</b> Most acquirers share one; one or two differ.</p>
+          <p><b>5.7 Same-day handoff counts as one day, not zero.</b> A party that handled and passed on a request consumed a day of someone's attention.</p>
+          <p><b>5.8 Deprioritisation stops every clock</b>, and those requests leave the turnaround averages but are counted separately with how long they sat first. That is ops effort which produced nothing, and hiding it flatters the team.</p>
+          <p><b>5.9 Approval and MID delivery are different events on different email threads.</b> The gap between them is invisible in the tracker and sits inside procurement turnaround. Measured here as a separate acquirer phase.</p>
+          <p><b>5.10 Acquirer SLA is judged per response round, not on total held time.</b> A bank that answers in 4 days, asks for a document, then answers in 4 more has met a 5-day SLA twice. Charging it the 8-day sum bills the bank for our own turnaround in between, and a bank that receives a complaint it can disprove stops reading the next one. Total held time is still reported, separately, as a measure of our own data quality: more than one round means the application could not be decided in a single pass.</p>
+          <p><b>5.11 BAU and bulk migration are reported separately.</b> A migration backlog otherwise destroys the BAU averages and hides a real capacity problem behind a one-off event.</p>
+          <p><b>5.12 The merchant is not a party.</b> Time waiting on a merchant is charged to BD, as it is today. Whether that is fair to BD is an open question in section 10.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="prd-6">
+    <div class="act-head"><p class="rail">06 — What the product does</p>
+      <div><h2>Six capabilities, each with the decision worth defending.</h2>
+        <p class="dek">Figures in italics are from the current run of the seeded synthetic dataset.</p></div></div>
+    <div class="act-body"><p class="rail">6.1 Intake</p>
+      <div>
+        <div class="prose">
+          <p>Checks every application the moment the ticket lands, at three levels: <b>present</b>, is the field there; <b>well formed</b>, does the PAN match the PAN format and does the GSTIN pass its own checksum; and <b>consistent with the rest of the record</b>.</p>
+          <p>A GSTIN carries the entity's PAN at characters 3 to 12 and its issuing state in the first two, so a record can pass every field-level check and still describe two different companies. That contradiction is what an underwriter spots, and finding it that way costs a full acquirer cycle.</p>
+          <p>Readiness is decided <b>per acquirer</b>, because acquirers ask for different fields. A missing signatory PAN blocks the three that want it and leaves the fourth untouched, which is what makes partial raising possible.</p>
+          <p>Bounces are consolidated <b>one per party, not per acquirer</b>, and the comment names the consequence. "Company GST: not provided (blocks ALDRIDGE, NORTHWAY_CYBS, NORTHWAY_FSS)" tells the receiving team how urgent it is in a way that "missing GST" does not.</p>
+          <p><i>Current run, 390 merchant use cases: 70.3% clean for every acquirer they were raised to, 12.6% ready for some and blocked for others, 17.2% blocked everywhere.</i></p>
+        </div>
+      </div>
+    </div>
+    <div class="act-body" style="margin-top:var(--s7)"><p class="rail">6.2 Bank files</p>
+      <div>
+        <div class="prose">
+          <p>One submission template per acquirer, described as configuration rather than code, because banks change these templates with no notice and no version number. The cost of absorbing a change decides whether the file is generated or typed.</p>
+          <p><b>Every column declares who owns it</b>: filled from the record, derived, constant, ops input, or owned by sales or finance. Most of the largest template is not ops', and that is the honest answer to how much of it can be automated. The pre-flight then reports "sales owes a settlement cycle on four merchants", which is a message that can be sent. "17 empty cells" is not.</p>
+          <p><b>Nothing is invented to fill a cell.</b> A plausible value typed in by ops is a commercial term nobody agreed, and it goes live.</p>
+          <p><b>Sheet grain is declared.</b> The identity tabs are one row per merchant, the deal tab one row per application. Writing a two-use-case merchant twice on the identity tab asks the bank to open two accounts for one merchant.</p>
+          <p><b>Identifier columns are written as text.</b> A pincode starting with zero and a twelve-digit account number are both numbers to a spreadsheet, and stored as numbers the bank reads something other than what was reviewed.</p>
+          <p><b>Rows are held back, not the file.</b> Four merchants waiting on a missing value do not keep the other fifty out of the morning batch.</p>
+          <p><i>Current run: 408 requests waiting, 324 go out today, 59 held on documents, 13 blocked by house policy, 12 waiting on an ops decision about a restriction.</i></p>
+        </div>
+      </div>
+    </div>
+    <div class="act-body" style="margin-top:var(--s7)"><p class="rail">6.3 Reply parser</p>
+      <div>
+        <div class="prose">
+          <p>Two streams, status replies and MID deliveries, read from each bank's own messy format: different column names, free-text status wording, rejection reasons written as sentences, legal names that drift from the record, and replies that cover only part of a batch.</p>
+          <p><b>Extraction is driven by the shape of the email, not the acquirer.</b> Going by acquirer means a bank that changes its layout silently yields zero rows and nobody notices for a week.</p>
+          <p><b>Negations are checked first.</b> "Not Approved" contains "Approved", and a substring test records a declined merchant as won.</p>
+          <p><b>Ambiguity fails closed.</b> Two candidates within 0.04 of each other go to a person.</p>
+          <p><i>Current run: 1,250 rows from 626 emails, 99.0% applied automatically at 100% precision, 1.0% held for review.</i></p>
+        </div>
+      </div>
+    </div>
+    <div class="act-body" style="margin-top:var(--s7)"><p class="rail">6.4 Restrictions</p>
+      <div>
+        <div class="prose">
+          <p>Each acquirer keeps its own restricted-category list. They do not agree with each other and they are not even in the same format: coded lists, lists split by payment instrument, a separate narrower ban for one product, and a page of prose with no codes at all. <b>A merchant on one category can be eligible at one bank, conditional at a second and refused at a third</b>, so this cannot be answered once for the merchant.</p>
+          <p>Every entry carries its source, and confidence follows the source rather than being typed in by whoever added it: a published circular is 1.0, a written confirmation 0.95, a rejection actually received 0.9, something said on a call 0.6. Nothing is ever deleted; entries are retired with a date and a reason.</p>
+          <p>Overrides are recorded, which is what makes the list self-correcting. An override the bank refuses on the category proves the entry right. One the bank approves proves it stale. One refused for an unrelated reason proves nothing either way and is counted as neither.</p>
+          <p><i>Current registry: 89 live entries across six acquirers, 3 blocking (all house policy), 33 warnings, 53 notes.</i></p>
+        </div>
+        <p class="pull">Only our own policy blocks. A category the business will not onboard is a rule. A category one bank currently refuses is a fact about today, and facts about today go stale without telling anyone. A hard block fails invisibly, because the system quietly stops raising to a bank that would now accept, and there is no rejection to notice.<cite>The design call this section exists for</cite></p>
+      </div>
+    </div>
+    <div class="act-body" style="margin-top:var(--s7)"><p class="rail">6.5 The chaser</p>
+      <div>
+        <div class="prose">
+          <p>Finds what each acquirer is holding past the agreed response time, ranks it, drafts one email per acquirer, and stops.</p>
+          <p><b>Nothing is chased that is waiting on us.</b> <i>572 of the currently open requests are.</i> A request late because a bank asked for a document nobody sent is not theirs to answer for, and chasing it spends credibility needed for the ones that genuinely are late.</p>
+          <p><b>Lateness is the round they hold now</b>, following rule 5.10.</p>
+          <p><b>Ranked by days over, weighted by priority tier</b>, steeply enough that a P0 one day late outranks a P4 six days late, shallowly enough that a P4 twelve days over still outranks that P0, so the queue does not starve its own tail.</p>
+          <p><b>The ladder ends.</b> One nudge, one firmer follow-up, then it stops emailing and writes a note for a person to raise on the relationship call.</p>
+          <p><i>Current run: 119 applications with an acquirer, 36 past the agreed time.</i></p>
+        </div>
+      </div>
+    </div>
+    <div class="act-body" style="margin-top:var(--s7)"><p class="rail">6.6 Dashboard</p>
+      <div>
+        <div class="prose">
+          <p>One self-contained page. Blended ops turnaround as the headline, hands-on time only, with the unraised queue excluded and reported separately underneath, because an average that includes an open queue moves with backlog size rather than with how the team is performing.</p>
+          <p>Then the acquirer scorecard sorted by bank days so the laggard surfaces on its own, bounce and rejection reasons built from the reason codes, an exception list ranked past-SLA first, and a per-request timeline with the overlapping clocks drawn and elapsed days stated against summed party days, so the gap between those two numbers is explicit rather than hidden.</p>
+        </div>
+        <p style="margin-top:var(--s5)"><a class="btn btn-s" href="https://workflowmidprocurement.vercel.app/" target="_blank" rel="noopener">Open the live build ↗</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="prd-7">
+    <div class="act-head"><p class="rail">07 — How success is measured</p>
+      <div><h2>Five measures, one number deliberately not optimised, and one question that cannot be answered yet.</h2></div></div>
+    <div class="act-body"><p class="rail">Measures</p>
+      <div>
+        <div class="dt-scroll">
+          <table class="dt">
+            <thead><tr><th>Measure</th><th>Why this one</th><th>Baseline today</th></tr></thead>
+            <tbody>
+              <tr><td>Ops solo days per request</td><td>Hands-on time, the only part the team controls</td><td>2.6 days</td></tr>
+              <tr><td>Bounces per request</td><td>Each one is a round trip that could have been found on arrival</td><td>27% of requests</td></tr>
+              <tr><td>Found on arrival vs at template time</td><td>The gap this closes</td><td>not measurable in the old tracker</td></tr>
+              <tr><td>Unraised queue age</td><td>The capacity signal the old report could not show</td><td>median 22 days, oldest 50</td></tr>
+              <tr><td>Acquirer breach rate, per round</td><td>Holds banks to what they agreed, defensibly</td><td>21% of 792 answered rounds</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose" style="margin-top:var(--s6)">
+          <p><b>Not match rate.</b> A parser that matches more rows looks better and is worse: a wrongly matched reply writes a wrong event into the clock and every figure downstream inherits it silently. The parser is measured on precision of what it applied, and the review queue is treated as a feature rather than a failure.</p>
+        </div>
+        <div class="prose" style="margin-top:var(--s6)">
+          <p><b>Whether chasing actually speeds banks up cannot currently be answered</b>, and the report says so in those words rather than printing a number.</p>
+          <p>The naive comparison says chasing makes banks slower, 9.5 working days against 4.4. That is selection, not effect: every chased round had already run past the SLA. Comparing across acquirers does not fix it either, because the chase day is a fixed function of each bank's SLA, so the chased arm is simply the banks with short SLAs.</p>
+          <p>The deeper problem is that the chase rule is deterministic, so within any one bank every eligible round was chased and there is no control group at all. The effect is unmeasurable by construction. So 10% of eligible rounds are deliberately never chased, and the comparison runs inside each acquirer on that acquirer's own chase day.</p>
+          <p>At current volume that collects roughly nine held-out rounds against 125 chased, which is far short of a usable floor.</p>
+        </div>
+        <p class="pull">The honest answer is "ask again in a few months". A system that printed a number from that evidence would be publishing noise that a team would act on.<cite>Section 7.3 — what cannot be measured yet</cite></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="prd-8">
+    <div class="act-head"><p class="rail">08 — Requirements</p>
+      <div><h2>Twenty requirements, each implemented and covered by tests.</h2>
+        <p class="dek">P0 means the product does not work without it.</p></div></div>
+    <div class="act-body"><p class="rail">By capability</p>
+      <div>
+        <div class="dt-scroll">
+          <table class="dt">
+            <thead><tr><th>#</th><th>Requirement</th><th>Priority</th></tr></thead>
+            <tbody>
+              <tr><td>R1</td><td>Status is derived from an immutable event log, never stored</td><td>P0</td></tr>
+              <tr><td>R2</td><td>Working-day calendar with per-acquirer holidays and a 2pm acquirer cut-off</td><td>P0</td></tr>
+              <tr><td>R3</td><td>Per-party episodes with overlap preserved, ops split into solo and overlap</td><td>P0</td></tr>
+              <tr><td>R4</td><td>Acquirer SLA judged on the worst single response round</td><td>P0</td></tr>
+              <tr><td>R5</td><td>Per-acquirer field requirements as configuration</td><td>P0</td></tr>
+              <tr><td>R6</td><td>Three-level validation: presence, format, cross-field consistency</td><td>P0</td></tr>
+              <tr><td>R7</td><td>One consolidated bounce per party, naming the acquirers each gap blocks</td><td>P0</td></tr>
+              <tr><td>R8</td><td>Partial raising: ready acquirers go today, blocked ones wait</td><td>P0</td></tr>
+              <tr><td>R9</td><td>Per-acquirer submission templates as configuration, with column ownership</td><td>P0</td></tr>
+              <tr><td>R10</td><td>Pre-flight: dropdown domains, duplicate rows, number mangling, row caps, tab consistency</td><td>P0</td></tr>
+              <tr><td>R11</td><td>Draft covering email per batch; no send path exists</td><td>P0</td></tr>
+              <tr><td>R12</td><td>Reply parsing by email shape, with negation handling and confidence scoring</td><td>P0</td></tr>
+              <tr><td>R13</td><td>Ambiguous matches queue for review rather than resolve</td><td>P0</td></tr>
+              <tr><td>R14</td><td>MCC catalogue with risk levels, instrument restrictions and licence requirements</td><td>P1</td></tr>
+              <tr><td>R15</td><td>Editable restriction registry with three enforcement levels and source-based confidence</td><td>P1</td></tr>
+              <tr><td>R16</td><td>Overrides recorded against the entry, with outcome tracking</td><td>P1</td></tr>
+              <tr><td>R17</td><td>Chase list by whose court, on the current round, ranked by tier-weighted lateness</td><td>P1</td></tr>
+              <tr><td>R18</td><td>Escalation ladder with a cooldown, ending in a human handover</td><td>P1</td></tr>
+              <tr><td>R19</td><td>Holdout and within-acquirer comparison for chase effectiveness</td><td>P2</td></tr>
+              <tr><td>R20</td><td>Dashboard: blended TAT, acquirer scorecard, exception list, drill-down timeline</td><td>P0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="prd-9">
+    <div class="act-head"><p class="rail">09 — What was cut</p>
+      <div><h2>Four things that were scoped and then deliberately left out.</h2></div></div>
+    <div class="act-body"><p class="rail">And why</p>
+      <div>
+        <div class="prose">
+          <p><b>Post-live website monitoring.</b> Originally scoped alongside the chaser. It requires fetching live merchant sites, which this project has no honest way to test: a scanner proven against invented web pages proves nothing. It is also a different product from procurement, closer to a compliance scanner. Building it here would have padded the project instead of finishing it.</p>
+          <p><b>Automatic promotion of acquirer agreement into house policy.</b> The system computes which categories every acquirer refuses and shows them as candidates, but will not block on them. The intersection of the lists gets wider the fewer lists we hold, so inferring a rule from it would make the rules strongest exactly where the data is thinnest. Promotion is a deliberate, recorded human action.</p>
+          <p><b>A merchant clock.</b> Time waiting on a merchant is still charged to BD. Adding a fifth party is modelled but not built, because it changes every historical figure and needs the operating team to agree first.</p>
+          <p><b>Sending.</b> Permanently, not for now.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="prd-10">
+    <div class="act-head"><p class="rail">10 — Open questions</p>
+      <div><h2>Five things this document does not settle.</h2></div></div>
+    <div class="act-body"><p class="rail">Unresolved</p>
+      <div>
+        <div class="prose">
+          <p><b>Should the merchant be a party?</b> BD is currently charged for merchant silence. Adding a merchant clock would be fairer to BD and would make every historical comparison discontinuous.</p>
+          <p><b>Were all 117 fields on the largest bank template mandatory</b>, or does a typical merchant fill a fraction? This decides how much of that file can truthfully be called automated.</p>
+          <p><b>What is the right holdout share?</b> 10% answers the chase question in months. 20% answers it in half the time and makes twice as many merchants wait.</p>
+          <p><b>Should contested rejections be a separate state?</b> When ops argues a rejection and the bank reclassifies it as "additional documents required", both the true rejection rate and the document count should stay honest.</p>
+          <p><b>How should the registry handle a bank that loosens a category permanently?</b> Currently a person retires the entry. There is a case for the evidence doing it automatically after enough approvals, and a stronger case against.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="prd-11">
+    <div class="act-head"><p class="rail">11 — Status, and what is not claimed</p>
+      <div><h2>What exists, what it runs on, and what would be dishonest to say about it.</h2></div></div>
+    <div class="act-body"><p class="rail">Honesty</p>
+      <div>
+        <div class="prose">
+          <p><b>What exists:</b> a working system of 37 source files and 283 tests, with a live dashboard, covering intake, file generation, reply parsing, the restriction registry and the chaser.</p>
+          <p><b>What it runs on:</b> a seeded synthetic dataset of 360 merchants, 1,376 requests, 4,311 events and 626 bank emails. Acquirers, merchants, templates, category lists and rate cards are all invented. Nothing from any real workplace appears in it, by design.</p>
+          <p><b>What is therefore not claimed.</b> No real MID has been procured through this. The accuracy figures measure the system against messiness this project invented, and real inboxes hold cases not modelled here. The turnaround figures describe the synthetic pipeline, not any real team's performance. The chase effectiveness question is unanswered, and section 07 explains why rather than estimating around it.</p>
+          <p><b>What production would need:</b> a real mailbox integration, the real per-bank templates and category lists loaded into the registry, a few weeks of someone checking the system's judgement of "late" and "blocked" against their own, and agreement from the operating team on the open questions above.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="act wrap" id="prd-12">
+    <div class="act-head"><p class="rail">12 — Reading the code</p>
+      <div><h2>Where each rule in this document lives.</h2></div></div>
+    <div class="act-body"><p class="rail">Code map</p>
+      <div>
+        <div class="dt-scroll">
+          <table class="dt">
+            <thead><tr><th>Where</th><th>What</th></tr></thead>
+            <tbody>
+              <tr><td><code>src/model.py</code></td><td>Entities, events, bounce routing. Status derived, never stored</td></tr>
+              <tr><td><code>src/tat.py</code></td><td>The engine. Replays events into per-party episodes</td></tr>
+              <tr><td><code>src/calendar_rules.py</code></td><td>Working days, holidays, the 2pm cut-off</td></tr>
+              <tr><td><code>src/intake/</code></td><td>Validation and per-acquirer readiness</td></tr>
+              <tr><td><code>src/filegen/</code></td><td>Template spec, mapping, pre-flight, writer, covering email</td></tr>
+              <tr><td><code>src/parsing/</code></td><td>Shape-driven extraction, classification, matching</td></tr>
+              <tr><td><code>src/catalogue/</code></td><td>MCC catalogue, acquirer policies, registry, overrides</td></tr>
+              <tr><td><code>src/chaser/</code></td><td>Overdue detection, ladder, drafts, effect measurement</td></tr>
+              <tr><td><code>tests/</code></td><td>283 tests, each one a rule from section 05 written down</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:var(--s6);display:flex;flex-wrap:wrap;gap:var(--s3)">
+          <a class="btn btn-p" href="https://github.com/navyajuneja1000-droid/MID-Procurement-Workflow" target="_blank" rel="noopener">The repository ↗</a>
+          <a class="btn btn-s" href="#/work/mid-procurement" data-route="/work/mid-procurement">Back to the case
             <svg class="arw" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
       </div>
     </div>
@@ -2423,6 +2805,7 @@ $("#themeBtn").addEventListener("click",function(){
 /* ---------- router ---------- */
 var views={"/":"view-home","/work/reconos":"view-reconos","/work/routeiq":"view-routeiq",
   "/work/mid-procurement":"view-mid-procurement",
+  "/work/mid-procurement/prd":"view-mid-prd",
   "/work/found-it":"view-found-it","/work/prolectro":"view-prolectro","/work/cogent-launch":"view-cogent-launch"};
 var pendingScroll=null;
 
@@ -2434,7 +2817,8 @@ function show(path,restore){
   });
   document.title = path==="/" ? "Navya Juneja" : "Navya Juneja — "+({
     "/work/reconos":"ReconOS","/work/routeiq":"RouteIQ",
-    "/work/mid-procurement":"MID Procurement Automation","/work/found-it":"Found It",
+    "/work/mid-procurement":"MID Procurement Automation",
+    "/work/mid-procurement/prd":"MID Procurement Automation · PRD","/work/found-it":"Found It",
     "/work/prolectro":"Prolectro","/work/cogent-launch":"Cogent Edge"}[path]||"");
   if(pendingScroll){
     var t=document.getElementById(pendingScroll); pendingScroll=null;
