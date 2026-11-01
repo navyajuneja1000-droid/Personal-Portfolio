@@ -638,11 +638,10 @@ body::before{
     radial-gradient(50% 40% at 62% 44%, var(--glow-4), transparent 70%),
     radial-gradient(44% 36% at 10% 68%, var(--glow-3), transparent 68%),
     radial-gradient(46% 38% at 92% 88%, var(--glow-5), transparent 68%);
-  animation:field 48s ease-in-out infinite alternate;
-}
-@keyframes field{
-  from{transform:translate3d(0,0,0) scale(1)}
-  to{transform:translate3d(-2.2%,1.6%,0) scale(1.07)}
+  /* Static, on its own GPU layer: it is painted once and only composited while
+     scrolling. It used to drift on a 48s loop, which forced a repaint of this
+     full-screen layer, and a re-blur of every frosted card above it, on every frame. */
+  will-change:transform;transform:translateZ(0);
 }
 body::after{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:var(--grain);
@@ -654,7 +653,6 @@ body::after{
 .wf,.sim,.jrn,.work,.themes,.otc,.pr,.ng,.vs,.steps,.fn,.tax-grid,.gws{
   background-image:linear-gradient(158deg,var(--card-2) 0%,var(--card) 58%);
   box-shadow:var(--shadow);
-  backdrop-filter:blur(10px) saturate(1.15);
 }
 .work,.themes,.otc,.pr,.ng,.vs,.steps,.fn,.tax-grid,.gws{background-color:var(--rule)}
 .wk,.theme,.otc > div,.pr > div,.ng div,.vs > div,.step,.fn-r,.tax-b,.gw{
@@ -663,7 +661,7 @@ body::after{
 
 /* sticky ledger column must stay opaque */
 table.mx th.cap,table.mx td.cap{background:var(--card-solid);background-image:none}
-table.mx thead th{background:var(--card-solid);background-image:none;backdrop-filter:blur(6px)}
+table.mx thead th{background:var(--card-solid);background-image:none}
 table.mx tbody tr:hover td,table.mx tbody tr:hover td.cap{background-color:var(--accent-soft)}
 
 /* ---- deep panels become gradients ---- */
